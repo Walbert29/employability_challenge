@@ -1,19 +1,16 @@
+import uuid
+from datetime import datetime
 from core.database import Base
-from sqlalchemy import Column, Integer, String
-from typing import List
+from sqlalchemy import Column, Integer, String, JSON, ARRAY, TIMESTAMP
 
-class Skills():
-    name = Column(String(200))
-    experience = Column(Integer)
-
-class VacancyModel(Base):
+class UserModel(Base):
     """
     User model for the  table vacancy
     """
 
     __tablename__ = "users"
 
-    user_id = Column(String(200), primary_key=True)
+    user_id = Column(String(200), primary_key=True, default=str(uuid.uuid4()))
 
     first_name = Column(String(200))
     
@@ -23,4 +20,8 @@ class VacancyModel(Base):
 
     years_previous_experience = Column(Integer)
     
-    skills = List[Skills]
+    skills = Column(ARRAY(JSON))
+
+    load_date = Column(TIMESTAMP(timezone=False))
+
+    update_date = Column(TIMESTAMP(timezone=False))
