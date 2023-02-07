@@ -8,7 +8,7 @@ class Skills(BaseModel):
 
     name: Optional[str] = Field()
 
-    experience: Optional[str] = Field()
+    experience: Optional[int] = Field()
 
 
 class UserSchema(BaseModel):
@@ -27,6 +27,8 @@ class UserSchema(BaseModel):
     skills: Optional[List[Skills]] = Field()
 
     load_date: Optional[datetime] = Field(default=datetime.utcnow())
+
+    update_date: Optional[datetime] = Field(default=datetime.utcnow())
 
 
 class UpdateUserSchema(UserSchema):

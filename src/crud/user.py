@@ -56,7 +56,7 @@ def create_user(db: Session, user_data_in: UserSchema):
 
         db.refresh(data_to_create)
 
-        return user_data_in
+        return data_to_create
 
     except Exception as error:
         logging.error(f"error creating the user, error: {error.args}")
@@ -83,8 +83,10 @@ def update_user(db: Session, update_data: UpdateUserSchema, user_id: str):
             setattr(user_data, var, value) if value is not None else None
 
         db.add(user_data)
-        
-        return update
+        db.commit()
+        db.refresh(user_data)
+
+        return user_data
 
     except Exception as error:
         logging.error(f"error updating the user, error: {error}")
@@ -99,9 +101,6 @@ def delete_user(db: Session, user_id: str):
         DELETE user of database
         """
         user = db.query(UserModel).filter(UserModel.user_id == user_id).first()
-
-        if user is None:
-            return None
 
         db.query(UserModel).filter(UserModel.user_id == user_id).delete()
 

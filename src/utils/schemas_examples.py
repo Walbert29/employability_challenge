@@ -6,8 +6,7 @@ user_schema = {
         "last_name": "Demo",
         "years_previous_experience": 5,
         "skills": [{
-                        "name": "Python"
-                    },{
+                        "name": "Python",
                         "experience": 2
                     }],
         "update_date": datetime.utcnow()

@@ -6,6 +6,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from schemas.user import UserSchema, UpdateUserSchema
 
+user_no_found = "User not found"
 
 def get_user_by_user_id(user_id: str):
     """
@@ -19,9 +20,9 @@ def get_user_by_user_id(user_id: str):
         if user_data is None:
             return JSONResponse(
                 status_code=status.HTTP_404_NOT_FOUND,
-                content={"message": "User not found"},
+                content={"message": user_no_found},
             )
-        
+
         return jsonable_encoder(user_data)
 
     except Exception as error:
@@ -46,9 +47,9 @@ def get_user_by_user_email(email: str):
         if user_data is None:
             return JSONResponse(
                 status_code=status.HTTP_404_NOT_FOUND,
-                content={"message": "User not found"},
+                content={"message": user_no_found},
             )
-        
+
         return jsonable_encoder(user_data)
 
     except Exception as error:
@@ -74,7 +75,7 @@ def create_user(data_user_in: UserSchema):
 
         exist_email = user.get_user_by_email(db=db, email=data_user_in.email)
 
-        if not exist_email is None:
+        if exist_email is not None:
             return JSONResponse(
                 status_code=status.HTTP_409_CONFLICT,
                 content={"message": "Email already exists"},
@@ -109,7 +110,7 @@ def update_user(user_id: str, update_data: UpdateUserSchema):
         if exist_user is None:
             return JSONResponse(
                 status_code=status.HTTP_404_NOT_FOUND,
-                content={"message": "User not found"},
+                content={"message": user_no_found},
             )
 
         return user.update_user(db= db, update_data=update_data, user_id=user_id)
@@ -141,7 +142,7 @@ def delete_user_by_id(user_id: str):
         if exist_user is None:
             return JSONResponse(
                 status_code=status.HTTP_404_NOT_FOUND,
-                content={"message": "User not found"},
+                content={"message": user_no_found},
             )
 
         user.delete_user(db= db, user_id=user_id)
