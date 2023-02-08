@@ -124,37 +124,3 @@ def update_user(user_id: str, update_data: UpdateUserSchema):
         )
     finally:
         db.close()
-
-
-def delete_user_by_id(user_id: str):
-    """
-    This method is responsible of delete a user
-    """
-    try:
-        db = create_session()
-
-        """
-        Check if a user exists
-        """
-
-        exist_user = user.get_user_by_id(db=db, user_id=user_id)
-
-        if exist_user is None:
-            return JSONResponse(
-                status_code=status.HTTP_404_NOT_FOUND,
-                content={"message": user_no_found},
-            )
-
-        user.delete_user(db= db, user_id=user_id)
-
-        return exist_user
-
-    except Exception as error:
-        db.rollback()
-        logging.error(f"services: delete_user_by_id => {error}")
-        raise HTTPException(
-            status_code=status.HTTP_424_FAILED_DEPENDENCY,
-            detail={"message": error.args},
-        )
-    finally:
-        db.close()

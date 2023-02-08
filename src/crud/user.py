@@ -91,23 +91,3 @@ def update_user(db: Session, update_data: UpdateUserSchema, user_id: str):
     except Exception as error:
         logging.error(f"error updating the user, error: {error}")
         raise error
-
-
-# DELETE
-
-def delete_user(db: Session, user_id: str):
-    try:
-        """
-        DELETE user of database
-        """
-        user = db.query(UserModel).filter(UserModel.user_id == user_id).first()
-
-        db.query(UserModel).filter(UserModel.user_id == user_id).delete()
-
-        db.commit()
-
-        return user
-
-    except Exception as error:
-        logging.error(f"error deleting the user, error: {error}")
-        raise error

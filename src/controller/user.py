@@ -73,21 +73,3 @@ def update_user(user_id:str, data_user: UpdateUserSchema):
         UserSchema
     """
     return user.update_user(user_id=user_id, update_data=data_user)
-
-
-# DELETE
-
-@user_router.delete(
-    "/delete/{user_id}",
-    tags=["User"],
-    status_code=status.HTTP_200_OK,
-    summary="Delete an user",
-)
-def delete_user(user_id:str):
-    """
-    DELETE user from database
-
-    Returns:
-        UserSchema
-    """
-    return user.delete_user_by_id(user_id=user_id)
