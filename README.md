@@ -53,4 +53,5 @@ Features:
 
 **Module Application**
 * Search for applications from a user: This functionality is responsible for returning to which vacancies a person has applied with their respective information.
+
 * Search applications for a vacancy: This functionality is responsible for finding which users have applied for a vacancy and displaying their information.
