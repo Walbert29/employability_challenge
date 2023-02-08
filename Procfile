@@ -1,1 +1,2 @@
-web: uvicorn src.main:app
+web: cd src
+web: uvicorn main:app
