@@ -11,11 +11,17 @@ vacancy_router = APIRouter(prefix="/vacancy")
     "/{vacancy_id}",
     tags=["Vacancy"],
     status_code=status.HTTP_200_OK,
-    summary="Return a vacancy by id",
+    summary="Return the information of a vacancy based on its id",
 )
 def get_vacancy_by_id(vacancy_id: str):
     """
-    GET vacancy by Vacancy ID
+    This controller is responsible for returning all the information stored in the database of a vacancy
+
+    Method:
+        GET
+
+    Args:
+        vacancy_id (str): Vacancy ID
 
     Returns:
         VacancySchema
@@ -33,7 +39,13 @@ def get_vacancy_by_id(vacancy_id: str):
 )
 def create_vacancy(vacancy_data_in: VacancySchema):
     """
-    CREATE a vacancy in database
+    This controller is in charge of creating a vacancy in the database
+
+    Method:
+        POST
+
+    Args:
+        vacancy_data_in (VacancySchema): Vacancy Data
 
     Returns:
         VacancySchema
@@ -51,7 +63,13 @@ def create_vacancy(vacancy_data_in: VacancySchema):
 )
 def delete_vacancy_by_vacancy_id(vacancy_id:str):
     """
-    DELETE a vacancy from database
+    This controller is in charge of deleting a vacancy in the database
+
+    Method:
+        DELETE
+
+    Args:
+        vacancy_id (str): Vacancy ID
 
     Returns:
         VacancySchema

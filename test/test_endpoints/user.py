@@ -6,9 +6,17 @@ user = TestClient(app)
 
 
 def test_get_by_email():
+
+    # Define the data and url of the request
+
     email_test = "challenge@demool.com"
+
     response = user.get(f"user/email/{email_test}")
+
+    # Take the test
+
     assert response.status_code == 200
+
     assert response.json() == {
       "first_name": "Challenge",
       "email": "challenge@demool.com",
@@ -27,9 +35,17 @@ def test_get_by_email():
 
 
 def test_get_by_user_id():
+
+    # Define the data and url of the request
+
     id_test = "a2d060f6-bda1-4326-9f3e-cc1c3da37805"
+
     response = user.get(f"user/{id_test}")
+
+    # Take the test
+
     assert response.status_code == 200
+
     assert response.json() == {
       "first_name": "Challenge",
       "email": "challenge@demool.com",
@@ -48,6 +64,9 @@ def test_get_by_user_id():
 
 
 def test_create_user():
+
+    # Define the data and url of the request
+
     data_to_create = {
       "first_name": "Backend",
       "last_name": "Test",
@@ -62,8 +81,13 @@ def test_create_user():
       "load_date": "2023-02-08T03:45:11.026579",
       "update_date": "2023-02-08T03:45:11.026579"
     }
+
     response = user.post(f"user/create", data=json.dumps(data_to_create))
+
+    # Take the test
+
     assert response.status_code == 201
+
     assert response.json() == {
       "first_name": "Backend",
       "email": "backend@test.com",
@@ -82,7 +106,11 @@ def test_create_user():
 
 
 def test_update_user():
+
+    # Define the data and url of the request
+
     user_id = "a2d060f6-bda1-4326-9f3e-cc1c3da37805"
+
     data_to_update = {
       "first_name": "Challenge",
       "last_name": "Demo",
@@ -95,8 +123,13 @@ def test_update_user():
       ],
       "update_date": "2023-02-08T03:45:11.026579"
     }
+
     response = user.put(f"user/update/{user_id}", data=json.dumps(data_to_update))
+
+    # Take the test
+
     assert response.status_code == 200
+
     assert response.json() == {
         "first_name": "Challenge",
         "email": "challenge@demool.com",

@@ -11,11 +11,17 @@ user_router = APIRouter(prefix="/user")
     "/email/{email}",
     tags=["User"],
     status_code=status.HTTP_200_OK,
-    summary="Return a user by email",
+    summary="Return the information of a user based on his email",
 )
 def get_user_by_email(email: str):
     """
-    GET user by User email
+    This controller is responsible for returning the information stored in a user's database, based on their email
+
+    Method:
+        GET
+
+    Args:
+        email (str): Email
 
     Returns:
         UserSchema
@@ -27,11 +33,17 @@ def get_user_by_email(email: str):
     "/{user_id}",
     tags=["User"],
     status_code=status.HTTP_200_OK,
-    summary="Return a user by id",
+    summary="Return the information of a user based on his id",
 )
 def get_user_by_id(user_id: str):
     """
-    GET user by User ID
+    This controller is responsible for returning the information stored in a user's database, based on their id
+
+    Method:
+        GET
+
+    Args:
+        user_id (str): user ID
 
     Returns:
         UserSchema
@@ -45,11 +57,17 @@ def get_user_by_id(user_id: str):
     "/create",
     tags=["User"],
     status_code=status.HTTP_201_CREATED,
-    summary="Create an user",
+    summary="Create an user in the database",
 )
 def create_user(data_user: UserSchema):
     """
-    CREATE an user in database
+    This controller is responsible for making the request for the creation of a user in the database
+
+    Method:
+        POST
+
+    Args:
+        data_user (UserSchema): User Data
 
     Returns:
         UserSchema
@@ -63,11 +81,18 @@ def create_user(data_user: UserSchema):
     "/update/{user_id}",
     tags=["User"],
     status_code=status.HTTP_200_OK,
-    summary="Create an user",
+    summary="Update data from user",
 )
 def update_user(user_id:str, data_user: UpdateUserSchema):
     """
-    UPDATE data from user in database
+    This controller is responsible for making the request for the update data of a user in the database
+
+    Method:
+        PUT
+
+    Args:
+        user_id (str): User ID
+        data_user (UpdateUserSchema): User Data Update
 
     Returns:
         UserSchema

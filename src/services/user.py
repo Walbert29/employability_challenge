@@ -10,10 +10,18 @@ user_no_found = "User not found"
 
 def get_user_by_user_id(user_id: str):
     """
-    This method is responsible for extracting all the information of a user based on his id
+    This function is responsible for searching for a user's information and returning a JSON with said data based on their id
+
+    Args:
+        user_id (str): User ID
+
+    Returns:
+        UserSchema
     """
     try:
         db = create_session()
+
+        # Search and verify the existence of the user
 
         user_data = user.get_user_by_id(db=db, user_id=user_id)
 
@@ -37,10 +45,18 @@ def get_user_by_user_id(user_id: str):
 
 def get_user_by_user_email(email: str):
     """
-    This method is responsible for extracting all the information of a user based on his email
+    This function is responsible for searching for a user's information and returning a JSON with said data based on their email
+
+    Args:
+        user_id (str): User ID
+
+    Returns:
+        UserSchema
     """
     try:
         db = create_session()
+
+        # Search and verify the existence of the user
 
         user_data = user.get_user_by_email(db=db, email=email)
 
@@ -64,14 +80,18 @@ def get_user_by_user_email(email: str):
 
 def create_user(data_user_in: UserSchema):
     """
-    This method is responsible for creating a user with their respective information in the database
+    This function is responsible for creating user in databse
+
+    Args:
+        data_user_in (UserSchema): User Data
+
+    Returns:
+        UserSchema
     """
     try:
         db = create_session()
 
-        """
-        Check if a user exists
-        """
+        # Check if a user exists
 
         exist_email = user.get_user_by_email(db=db, email=data_user_in.email)
 
@@ -96,14 +116,19 @@ def create_user(data_user_in: UserSchema):
 
 def update_user(user_id: str, update_data: UpdateUserSchema):
     """
-    This method is responsible of update the data in database from user
+    This function is responsible for updating user in databse
+
+    Args:
+        user_id (str): User ID
+        update_data (UpdateUserSchema): User Data Update
+
+    Returns:
+        UpdateUserSchema
     """
     try:
         db = create_session()
 
-        """
-        Check if a user exists
-        """
+        # Check if a user exists
 
         exist_user = user.get_user_by_id(db=db, user_id=user_id)
 

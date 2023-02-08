@@ -8,7 +8,7 @@ class ApplicationModel(Base):
 
     __tablename__ = "application"
 
-    application_id = id = Column(Integer, primary_key=True, autoincrement=True)
+    application_id = Column(Integer, primary_key=True, autoincrement=True)
 
     user_id = Column(String(200))
 

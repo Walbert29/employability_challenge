@@ -11,10 +11,18 @@ user_no_found = "User not found"
 
 def get_applications_by_user_id(user_id: str):
     """
-    This method is responsible for extracting all the information of a user based on his id
+    This function is in charge of searching for the applications that a user has and creating a resulting json with the list of them
+
+    Args:
+        user_id (str): User ID
+
+    Returns:
+        JSON List Postulations
     """
     try:
         db = create_session()
+
+        # Search and verify the existence of the user
 
         user_data = user.get_user_by_id(db=db, user_id=user_id)
 
@@ -24,6 +32,8 @@ def get_applications_by_user_id(user_id: str):
                 content={"message": user_no_found},
             )
 
+        # Search and verify the applications you have stored
+
         applications_user = jsonable_encoder(application.get_applications_by_user_id(db=db, user_id=user_id))
 
         if applications_user == []:
@@ -31,6 +41,8 @@ def get_applications_by_user_id(user_id: str):
                 status_code=status.HTTP_200_OK,
                 content={"message": "The user has no applications"},
             )
+
+        # Build the JSON with the list of the user's applications
 
         data_applications = []
 
@@ -55,10 +67,18 @@ def get_applications_by_user_id(user_id: str):
 
 def get_applications_by_vacancy_id(vacancy_id: str):
     """
-    This method is responsible for extracting all the information of a user based on his id
+    This function is in charge of searching for the users that a vacancy has and creating a resulting json with the list of them
+
+    Args:
+        vacancy_id (str): Vacancy ID
+
+    Returns:
+        JSON List Postulations
     """
     try:
         db = create_session()
+
+        # Search and verify the existence of the vacancy
 
         vacancy_data = vacancy.get_vacancy_by_id(db=db, vacancy_id=vacancy_id)
 
@@ -68,6 +88,8 @@ def get_applications_by_vacancy_id(vacancy_id: str):
                 content={"message": vacancy_no_found},
             )
 
+        # Search and verify the applications you have stored
+
         applications_vacancy = jsonable_encoder(application.get_applications_by_vacancy_id(db=db, vacancy_id=vacancy_id))
 
         if applications_vacancy == []:
@@ -75,6 +97,8 @@ def get_applications_by_vacancy_id(vacancy_id: str):
                 status_code=status.HTTP_200_OK,
                 content={"message": "The vacancy has no applications"},
             )
+
+         # Build the JSON with the list of users applying for the vacancy
 
         data_applications = []
 
@@ -99,7 +123,13 @@ def get_applications_by_vacancy_id(vacancy_id: str):
 
 def create_application(data_application_in: ApplicationSchema):
     """
-    This method is responsible for creating a user with their respective information in the database
+    This function is responsible for creating the applications
+
+    Args:
+        data_application_in (ApplicationSchema): Application Data
+
+    Returns:
+        ApplicationSchema
     """
     try:
         db = create_session()

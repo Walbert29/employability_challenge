@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String, JSON, ARRAY, TIMESTAMP
 
 class UserModel(Base):
     """
-    User model for the  table vacancy
+    User model for the table Users
     """
 
     __tablename__ = "users"

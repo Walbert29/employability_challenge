@@ -20,8 +20,7 @@ def create_session() -> Session:
     engine = create_engine(
         url=f"postgresql://{username}:{password}@{db_host}:{db_port}/{db_name}"
     )
-    
-    # Connect and create session
+
     session_maker = sessionmaker(bind=engine)
     session = session_maker()
     return session

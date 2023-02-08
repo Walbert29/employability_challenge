@@ -5,9 +5,17 @@ user = TestClient(app)
 
 
 def test_application_by_user_id():
+
+    # Define the data and url of the request
+
     user_id = "a2d060f6-bda1-4326-9f3e-cc1c3da37805"
+
     response = user.get(f"application/user/{user_id}")
+
+    # Take the test
+
     assert response.status_code == 200
+
     assert response.json() == [
         {
         "postulation_id": 3,
@@ -32,9 +40,17 @@ def test_application_by_user_id():
 
 
 def test_application_by_vacancy_id():
+
+    # Define the data and url of the request
+
     vacancy_id = "216c862b-9458-44e9-82a7-8e5af900d99b"
+
     response = user.get(f"application/vacancy/{vacancy_id}")
+
+    # Take the test
+
     assert response.status_code == 200
+
     assert response.json() == [
       {
         "postulation_id": 3,

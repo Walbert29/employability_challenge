@@ -11,7 +11,14 @@ def get_user_by_id(db: Session, user_id: str):
 
     try:
         """
-        GET a user's information based on their ID
+        This function is responsible for fetching the user's information from the database on based user_id.
+
+        Args:
+            db (Session): Session DB
+            user_id (str): User ID
+
+        Returns:
+            UserModel
         """
         user = db.query(UserModel).filter(UserModel.user_id == user_id).first()
 
@@ -26,7 +33,14 @@ def get_user_by_email(db: Session, email: str):
 
     try:
         """
-        GET a user's information based on email
+        This function is responsible for fetching the user's information from the database on based email.
+
+        Args:
+            db (Session): Session DB
+            email (str): Email
+
+        Returns:
+            UserModel
         """
         user = db.query(UserModel).filter(UserModel.email == email).first()
 
@@ -43,7 +57,14 @@ def create_user(db: Session, user_data_in: UserSchema):
 
     try:
         """
-        POST for create a user
+        This function is responsible for creating users in the database.
+
+        Args:
+            db (Session): Session DB
+            user_data_in (UserSchema): User Data
+
+        Returns:
+            UserModel
         """
 
         json_data = jsonable_encoder(user_data_in)
@@ -70,7 +91,15 @@ def update_user(db: Session, update_data: UpdateUserSchema, user_id: str):
 
     try:
         """
-        POST for create a user
+        This function is responsible for updating users in the database.
+
+        Args:
+            db (Session): Session DB
+            user_data_in (UpdateUserSchema): User Data Update
+            user_id (str): User ID
+
+        Returns:
+            UserModel
         """
 
         user_data = db.query(UserModel).filter(UserModel.user_id == user_id).first()

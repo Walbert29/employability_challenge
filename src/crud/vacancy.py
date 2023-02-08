@@ -11,7 +11,14 @@ def get_vacancy_by_id(db: Session, vacancy_id: str):
 
     try:
         """
-        GET a vacancy information based ID
+        This function is responsible for extracting the data of a vacancy based on its id
+
+        Args:
+            db (Session): Session DB
+            vacancy_id (str): Vacancy ID
+
+        Returns:
+            VacancyModel
         """
         vacancy = db.query(VacancyModel).filter(VacancyModel.vacancy_id == vacancy_id).first()
 
@@ -26,7 +33,13 @@ def get_all_vacancies(db: Session):
 
     try:
         """
-        GET all vacancies from database
+        This function is responsible for extracting all vacancies in the database
+
+        Args:
+            db (Session): Session DB
+
+        Returns:
+            List[VacancyModel]
         """
         vacancies = db.query(VacancyModel).all()
 
@@ -43,7 +56,14 @@ def create_vacancy(db: Session, vacancy_data_in: VacancySchema):
 
     try:
         """
-        POST for create a vacancy
+        This function is responsible for creating vacancy in the database
+
+        Args:
+            db (Session): Session DB
+            vacancy_data_in (VacancySchema): Vacancy Data
+
+        Returns:
+            VacancyModel
         """
 
         json_data = jsonable_encoder(vacancy_data_in)
@@ -68,7 +88,14 @@ def create_vacancy(db: Session, vacancy_data_in: VacancySchema):
 def delete_vacancy_by_id(db: Session, vacancy_id: str):
     try:
         """
-        DELETE vacancy from database
+        This function is responsible for deleting vacancy in the database
+
+        Args:
+            db (Session): Session DB
+            vacancy_id (str): Vacancy ID
+
+        Returns:
+            VacancyModel
         """
         vacancy = db.query(VacancyModel).filter(VacancyModel.vacancy_id == vacancy_id).first()
 

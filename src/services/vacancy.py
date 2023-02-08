@@ -10,10 +10,18 @@ vacancy_no_found = "Vacancy not found"
 
 def get_vacancy_by_vacancy_id(vacancy_id: str):
     """
-    This method is responsible for extracting all the information of a user based on his id
+    This function is in charge of searching and displaying the information of a vacancy
+
+    Args:
+        vacancy_id (str): Vacancy ID
+
+    Returns:
+        VacancySchema
     """
     try:
         db = create_session()
+
+        # Check if a user exists
 
         vacancy_data = vacancy.get_vacancy_by_id(db=db, vacancy_id=vacancy_id)
 
@@ -37,7 +45,13 @@ def get_vacancy_by_vacancy_id(vacancy_id: str):
 
 def create_vacancy(data_vacancy_in: VacancySchema):
     """
-    This method is responsible for creating a user with their respective information in the database
+    This function is responsible for creating the vacancy in the database
+
+    Args:
+        data_vacancy_in (VacancySchema): Vacancy Data
+
+    Returns:
+        VacancySchema
     """
     try:
         db = create_session()
@@ -57,14 +71,18 @@ def create_vacancy(data_vacancy_in: VacancySchema):
 
 def delete_vacancy_by_id(vacancy_id: str):
     """
-    This method is responsible of delete a user
+    This function is responsible for removing the vacancy from the database
+
+    Args:
+        vacancy_id (str): Vacancy ID
+
+    Returns:
+        VacancySchema
     """
     try:
         db = create_session()
 
-        """
-        Check if a vacancy exists
-        """
+        # Check if a vacancy exists
 
         vacancy_data = vacancy.get_vacancy_by_id(db=db, vacancy_id=vacancy_id)
 
