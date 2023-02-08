@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 
-from src.services.application import (
+from services.application import (
     get_applications_by_user_id,
     get_applications_by_vacancy_id,
 )

@@ -3,10 +3,10 @@ import logging
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
-from src.models.application import ApplicationModel
-from src.models.user import UserModel
-from src.models.vacancy import VacancyModel
-from src.schemas.application import ApplicationSchema
+from models.application import ApplicationModel
+from models.user import UserModel
+from models.vacancy import VacancyModel
+from schemas.application import ApplicationSchema
 
 # GET
 

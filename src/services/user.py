@@ -4,9 +4,9 @@ from fastapi import HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
-from src.core.database import create_session
-from src.crud import user
-from src.schemas.user import UpdateUserSchema, UserSchema
+from core.database import create_session
+from crud import user
+from schemas.user import UpdateUserSchema, UserSchema
 
 user_no_found = "User not found"
 

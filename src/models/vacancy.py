@@ -2,7 +2,7 @@ import uuid
 
 from sqlalchemy import ARRAY, JSON, TIMESTAMP, Column, Integer, String
 
-from src.core.database import Base
+from core.database import Base
 
 
 class VacancyModel(Base):

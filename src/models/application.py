@@ -1,6 +1,6 @@
 from sqlalchemy import TIMESTAMP, Column, Integer, String
 
-from src.core.database import Base
+from core.database import Base
 
 
 class ApplicationModel(Base):

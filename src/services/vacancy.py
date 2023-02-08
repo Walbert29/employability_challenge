@@ -4,9 +4,9 @@ from fastapi import HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
-from src.core.database import create_session
-from src.crud import vacancy
-from src.schemas.vacancy import VacancySchema
+from core.database import create_session
+from crud import vacancy
+from schemas.vacancy import VacancySchema
 
 vacancy_no_found = "Vacancy not found"
 
