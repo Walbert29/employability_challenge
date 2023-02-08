@@ -3,8 +3,8 @@ import logging
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
-from models.user import UserModel
-from schemas.user import UpdateUserSchema, UserSchema
+from src.models.user import UserModel
+from src.schemas.user import UpdateUserSchema, UserSchema
 
 # GET
 
