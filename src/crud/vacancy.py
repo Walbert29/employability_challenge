@@ -22,6 +22,21 @@ def get_vacancy_by_id(db: Session, vacancy_id: str):
         raise error
 
 
+def get_all_vacancies(db: Session):
+
+    try:
+        """
+        GET all vacancies from database
+        """
+        vacancies = db.query(VacancyModel).all()
+
+        return vacancies
+
+    except Exception as error:
+        logging.error(f"error getting all vacancies, error: {error}")
+        raise error
+
+
 # POST
 
 def create_vacancy(db: Session, vacancy_data_in: VacancySchema):
