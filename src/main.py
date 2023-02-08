@@ -1,10 +1,10 @@
 import uvicorn
+from fastapi import FastAPI
 
+from controller.application import application_router
+from controller.employability import employability_router
 from controller.user import user_router
 from controller.vacancy import vacancy_router
-from controller.employability import employability_router
-from controller.application import application_router
-from fastapi import FastAPI
 
 app = FastAPI(
     title="Employability Api",

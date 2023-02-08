@@ -1,10 +1,13 @@
 import logging
+
 import numpy as np
+from fastapi import HTTPException, status
+from fastapi.responses import JSONResponse
+
+from core.database import create_session
 from crud.user import get_user_by_id
 from crud.vacancy import get_all_vacancies
-from core.database import create_session
-from fastapi import status, HTTPException
-from fastapi.responses import JSONResponse
+
 
 def get_matches_by_user_id(user_id: str):
     """
@@ -31,7 +34,14 @@ def get_matches_by_user_id(user_id: str):
 
         # Match the skills described in the user's profile
 
-        user_skills = (" ".join([f"{skill.get('name')} {skill.get('experience')}" for skill in user_data.skills])).lower()
+        user_skills = (
+            " ".join(
+                [
+                    f"{skill.get('name')} {skill.get('experience')}"
+                    for skill in user_data.skills
+                ]
+            )
+        ).lower()
 
         # Check if there are vacancies in the database to generate the matches
 
@@ -49,13 +59,22 @@ def get_matches_by_user_id(user_id: str):
 
             # Match the skills required in the vacancy
 
-            vacancy_skills = (" ".join([f"{vacancy.get('name')} {vacancy.get('experience')}" for vacancy in vacancy_data.required_skills])).lower()
+            vacancy_skills = (
+                " ".join(
+                    [
+                        f"{vacancy.get('name')} {vacancy.get('experience')}"
+                        for vacancy in vacancy_data.required_skills
+                    ]
+                )
+            ).lower()
 
             # Send the function the list of the required skills and the achieved skills of the user
 
-            similitude = get_matches(user_skills=user_skills, vacancy_skills=vacancy_skills)
+            similitude = get_matches(
+                user_skills=user_skills, vacancy_skills=vacancy_skills
+            )
 
-             # Check at least 50% similarity
+            # Check at least 50% similarity
 
             if similitude >= 0.5:
                 vacancies_to_recommend.append(vacancy_data)
@@ -86,7 +105,9 @@ def get_matches(user_skills: str, vacancy_skills: str):
 
     split_words_vacancy_skills = vacancy_skills.split()
 
-    union_words_no_repeat = set(split_words_user_skills).union(set(split_words_vacancy_skills))
+    union_words_no_repeat = set(split_words_user_skills).union(
+        set(split_words_vacancy_skills)
+    )
 
     # Create matrix of 0 the size of the split words
 
@@ -106,4 +127,7 @@ def get_matches(user_skills: str, vacancy_skills: str):
 
     # The product between the matrices is realized
 
-    return np.dot(matrix_zero_vacancy_skills, matrix_zero_user_skills) / (np.linalg.norm(matrix_zero_vacancy_skills) * np.linalg.norm(matrix_zero_user_skills))
+    return np.dot(matrix_zero_vacancy_skills, matrix_zero_user_skills) / (
+        np.linalg.norm(matrix_zero_vacancy_skills)
+        * np.linalg.norm(matrix_zero_user_skills)
+    )

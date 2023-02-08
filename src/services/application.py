@@ -1,13 +1,16 @@
 import logging
-from crud import user, vacancy, application
-from core.database import create_session
-from fastapi import status, HTTPException
+
+from fastapi import HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+
+from core.database import create_session
+from crud import application, user, vacancy
 from schemas.application import ApplicationSchema
 
 vacancy_no_found = "Vacancy not found"
 user_no_found = "User not found"
+
 
 def get_applications_by_user_id(user_id: str):
     """
@@ -34,7 +37,9 @@ def get_applications_by_user_id(user_id: str):
 
         # Search and verify the applications you have stored
 
-        applications_user = jsonable_encoder(application.get_applications_by_user_id(db=db, user_id=user_id))
+        applications_user = jsonable_encoder(
+            application.get_applications_by_user_id(db=db, user_id=user_id)
+        )
 
         if applications_user == []:
             return JSONResponse(
@@ -48,8 +53,8 @@ def get_applications_by_user_id(user_id: str):
 
         for application_data in applications_user:
             current_application = {
-                "postulation_id":application_data.get("ApplicationModel").get("id"),
-                "vacancy":application_data.get("VacancyModel")
+                "postulation_id": application_data.get("ApplicationModel").get("id"),
+                "vacancy": application_data.get("VacancyModel"),
             }
             data_applications.append(current_application)
 
@@ -90,7 +95,9 @@ def get_applications_by_vacancy_id(vacancy_id: str):
 
         # Search and verify the applications you have stored
 
-        applications_vacancy = jsonable_encoder(application.get_applications_by_vacancy_id(db=db, vacancy_id=vacancy_id))
+        applications_vacancy = jsonable_encoder(
+            application.get_applications_by_vacancy_id(db=db, vacancy_id=vacancy_id)
+        )
 
         if applications_vacancy == []:
             return JSONResponse(
@@ -98,14 +105,14 @@ def get_applications_by_vacancy_id(vacancy_id: str):
                 content={"message": "The vacancy has no applications"},
             )
 
-         # Build the JSON with the list of users applying for the vacancy
+        # Build the JSON with the list of users applying for the vacancy
 
         data_applications = []
 
         for application_data in applications_vacancy:
             current_application = {
-                "postulation_id":application_data.get("ApplicationModel").get("id"),
-                "user":application_data.get("UserModel")
+                "postulation_id": application_data.get("ApplicationModel").get("id"),
+                "user": application_data.get("UserModel"),
             }
             data_applications.append(current_application)
 
@@ -134,7 +141,9 @@ def create_application(data_application_in: ApplicationSchema):
     try:
         db = create_session()
 
-        return application.create_application(db= db, data_application_in=data_application_in)
+        return application.create_application(
+            db=db, data_application_in=data_application_in
+        )
 
     except Exception as error:
         db.rollback()

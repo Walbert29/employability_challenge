@@ -1,12 +1,15 @@
 import logging
-from crud import vacancy
-from core.database import create_session
-from fastapi import status, HTTPException
+
+from fastapi import HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+
+from core.database import create_session
+from crud import vacancy
 from schemas.vacancy import VacancySchema
 
 vacancy_no_found = "Vacancy not found"
+
 
 def get_vacancy_by_vacancy_id(vacancy_id: str):
     """
@@ -56,7 +59,7 @@ def create_vacancy(data_vacancy_in: VacancySchema):
     try:
         db = create_session()
 
-        return vacancy.create_vacancy(db= db, vacancy_data_in=data_vacancy_in)
+        return vacancy.create_vacancy(db=db, vacancy_data_in=data_vacancy_in)
 
     except Exception as error:
         db.rollback()
@@ -92,7 +95,7 @@ def delete_vacancy_by_id(vacancy_id: str):
                 content={"message": vacancy_no_found},
             )
 
-        return vacancy.delete_vacancy_by_id(db= db, vacancy_id=vacancy_id)
+        return vacancy.delete_vacancy_by_id(db=db, vacancy_id=vacancy_id)
 
     except Exception as error:
         db.rollback()

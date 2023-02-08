@@ -1,13 +1,15 @@
 import logging
-from models.application import ApplicationModel
-from models.vacancy import VacancyModel
-from models.user import UserModel
-from schemas.application import ApplicationSchema
-from sqlalchemy.orm import Session
-from fastapi.encoders import jsonable_encoder
 
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy.orm import Session
+
+from models.application import ApplicationModel
+from models.user import UserModel
+from models.vacancy import VacancyModel
+from schemas.application import ApplicationSchema
 
 # GET
+
 
 def get_applications_by_user_id(db: Session, user_id: str):
 
@@ -22,7 +24,12 @@ def get_applications_by_user_id(db: Session, user_id: str):
         Returns:
             ApplicationModel + VacancyModel
         """
-        applications = db.query(ApplicationModel, VacancyModel).filter(ApplicationModel.user_id == user_id).filter(ApplicationModel.vacancy_id == VacancyModel.vacancy_id).all()
+        applications = (
+            db.query(ApplicationModel, VacancyModel)
+            .filter(ApplicationModel.user_id == user_id)
+            .filter(ApplicationModel.vacancy_id == VacancyModel.vacancy_id)
+            .all()
+        )
 
         return applications
 
@@ -44,7 +51,12 @@ def get_applications_by_vacancy_id(db: Session, vacancy_id: str):
         Returns:
             ApplicationModel + VacancyModel
         """
-        applications = db.query(ApplicationModel, UserModel).filter(ApplicationModel.vacancy_id == vacancy_id).filter(ApplicationModel.user_id == UserModel.user_id).all()
+        applications = (
+            db.query(ApplicationModel, UserModel)
+            .filter(ApplicationModel.vacancy_id == vacancy_id)
+            .filter(ApplicationModel.user_id == UserModel.user_id)
+            .all()
+        )
 
         return applications
 
@@ -54,6 +66,7 @@ def get_applications_by_vacancy_id(db: Session, vacancy_id: str):
 
 
 # POST
+
 
 def create_application(db: Session, application_data_in: ApplicationSchema):
 

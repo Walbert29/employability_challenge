@@ -1,12 +1,15 @@
 import logging
-from crud import user
-from core.database import create_session
-from fastapi import status, HTTPException
+
+from fastapi import HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from schemas.user import UserSchema, UpdateUserSchema
+
+from core.database import create_session
+from crud import user
+from schemas.user import UpdateUserSchema, UserSchema
 
 user_no_found = "User not found"
+
 
 def get_user_by_user_id(user_id: str):
     """
@@ -101,7 +104,7 @@ def create_user(data_user_in: UserSchema):
                 content={"message": "Email already exists"},
             )
 
-        return user.create_user(db= db, user_data_in=data_user_in)
+        return user.create_user(db=db, user_data_in=data_user_in)
 
     except Exception as error:
         db.rollback()
@@ -138,7 +141,7 @@ def update_user(user_id: str, update_data: UpdateUserSchema):
                 content={"message": user_no_found},
             )
 
-        return user.update_user(db= db, update_data=update_data, user_id=user_id)
+        return user.update_user(db=db, update_data=update_data, user_id=user_id)
 
     except Exception as error:
         db.rollback()

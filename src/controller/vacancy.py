@@ -1,11 +1,12 @@
-from services import vacancy
-from schemas.vacancy import VacancySchema
 from fastapi import APIRouter, status
 
+from schemas.vacancy import VacancySchema
+from services import vacancy
 
 vacancy_router = APIRouter(prefix="/vacancy")
 
 # GET
+
 
 @vacancy_router.get(
     "/{vacancy_id}",
@@ -31,6 +32,7 @@ def get_vacancy_by_id(vacancy_id: str):
 
 # POST
 
+
 @vacancy_router.post(
     "/create",
     tags=["Vacancy"],
@@ -55,13 +57,14 @@ def create_vacancy(vacancy_data_in: VacancySchema):
 
 # DELETE
 
+
 @vacancy_router.delete(
     "/delete/{vacancy_id}",
     tags=["Vacancy"],
     status_code=status.HTTP_200_OK,
     summary="Delete a vacancy",
 )
-def delete_vacancy_by_vacancy_id(vacancy_id:str):
+def delete_vacancy_by_vacancy_id(vacancy_id: str):
     """
     This controller is in charge of deleting a vacancy in the database
 

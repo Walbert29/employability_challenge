@@ -1,8 +1,10 @@
-from typing import List, Optional
 from datetime import datetime
+from typing import List, Optional
 
 from pydantic import BaseModel, EmailStr, Field
+
 from utils.schemas_examples import user_schema
+
 
 class Skills(BaseModel):
 

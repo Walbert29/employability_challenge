@@ -1,6 +1,9 @@
 import uuid
+
+from sqlalchemy import ARRAY, JSON, TIMESTAMP, Column, Integer, String
+
 from core.database import Base
-from sqlalchemy import Column, Integer, String, JSON, ARRAY, TIMESTAMP
+
 
 class VacancyModel(Base):
     """

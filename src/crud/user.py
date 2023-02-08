@@ -1,11 +1,13 @@
 import logging
-from models.user import UserModel
-from schemas.user import UserSchema, UpdateUserSchema
-from sqlalchemy.orm import Session
-from fastapi.encoders import jsonable_encoder
 
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy.orm import Session
+
+from models.user import UserModel
+from schemas.user import UpdateUserSchema, UserSchema
 
 # GET
+
 
 def get_user_by_id(db: Session, user_id: str):
 
@@ -52,6 +54,7 @@ def get_user_by_email(db: Session, email: str):
 
 
 # POST
+
 
 def create_user(db: Session, user_data_in: UserSchema):
 

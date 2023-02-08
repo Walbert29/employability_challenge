@@ -1,11 +1,12 @@
-from services import user
-from schemas.user import UserSchema, UpdateUserSchema
 from fastapi import APIRouter, status
 
+from schemas.user import UpdateUserSchema, UserSchema
+from services import user
 
 user_router = APIRouter(prefix="/user")
 
 # GET
+
 
 @user_router.get(
     "/email/{email}",
@@ -53,6 +54,7 @@ def get_user_by_id(user_id: str):
 
 # POST
 
+
 @user_router.post(
     "/create",
     tags=["User"],
@@ -77,13 +79,14 @@ def create_user(data_user: UserSchema):
 
 # PUT
 
+
 @user_router.put(
     "/update/{user_id}",
     tags=["User"],
     status_code=status.HTTP_200_OK,
     summary="Update data from user",
 )
-def update_user(user_id:str, data_user: UpdateUserSchema):
+def update_user(user_id: str, data_user: UpdateUserSchema):
     """
     This controller is responsible for making the request for the update data of a user in the database
 

@@ -5,10 +5,7 @@ user_schema = {
         "first_name": "Challenge",
         "last_name": "Demo",
         "years_previous_experience": 5,
-        "skills": [{
-                        "name": "Python",
-                        "experience": 2
-                    }],
-        "update_date": datetime.utcnow()
+        "skills": [{"name": "Python", "experience": 2}],
+        "update_date": datetime.utcnow(),
     }
 }

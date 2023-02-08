@@ -1,10 +1,11 @@
-from services.employability import get_matches_by_user_id
 from fastapi import APIRouter, status
 
+from services.employability import get_matches_by_user_id
 
 employability_router = APIRouter(prefix="/employability")
 
 # GET
+
 
 @employability_router.get(
     "/user/{user_id}",

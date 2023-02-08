@@ -1,11 +1,13 @@
 import logging
+
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy.orm import Session
+
 from models.vacancy import VacancyModel
 from schemas.vacancy import VacancySchema
-from sqlalchemy.orm import Session
-from fastapi.encoders import jsonable_encoder
-
 
 # GET
+
 
 def get_vacancy_by_id(db: Session, vacancy_id: str):
 
@@ -20,7 +22,9 @@ def get_vacancy_by_id(db: Session, vacancy_id: str):
         Returns:
             VacancyModel
         """
-        vacancy = db.query(VacancyModel).filter(VacancyModel.vacancy_id == vacancy_id).first()
+        vacancy = (
+            db.query(VacancyModel).filter(VacancyModel.vacancy_id == vacancy_id).first()
+        )
 
         return vacancy
 
@@ -51,6 +55,7 @@ def get_all_vacancies(db: Session):
 
 
 # POST
+
 
 def create_vacancy(db: Session, vacancy_data_in: VacancySchema):
 
@@ -85,6 +90,7 @@ def create_vacancy(db: Session, vacancy_data_in: VacancySchema):
 
 # DELETE
 
+
 def delete_vacancy_by_id(db: Session, vacancy_id: str):
     try:
         """
@@ -97,7 +103,9 @@ def delete_vacancy_by_id(db: Session, vacancy_id: str):
         Returns:
             VacancyModel
         """
-        vacancy = db.query(VacancyModel).filter(VacancyModel.vacancy_id == vacancy_id).first()
+        vacancy = (
+            db.query(VacancyModel).filter(VacancyModel.vacancy_id == vacancy_id).first()
+        )
 
         db.query(VacancyModel).filter(VacancyModel.vacancy_id == vacancy_id).delete()
 

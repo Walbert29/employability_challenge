@@ -1,5 +1,7 @@
+from sqlalchemy import TIMESTAMP, Column, Integer, String
+
 from core.database import Base
-from sqlalchemy import Column, Integer, String, TIMESTAMP
+
 
 class ApplicationModel(Base):
     """
