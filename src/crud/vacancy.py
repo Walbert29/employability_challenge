@@ -3,8 +3,8 @@ import logging
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
-from src.models.vacancy import VacancyModel
-from src.schemas.vacancy import VacancySchema
+from models.vacancy import VacancyModel
+from schemas.vacancy import VacancySchema
 
 # GET
 

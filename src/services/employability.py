@@ -4,9 +4,9 @@ import numpy as np
 from fastapi import HTTPException, status
 from fastapi.responses import JSONResponse
 
-from src.core.database import create_session
-from src.crud.user import get_user_by_id
-from src.crud.vacancy import get_all_vacancies
+from core.database import create_session
+from crud.user import get_user_by_id
+from crud.vacancy import get_all_vacancies
 
 
 def get_matches_by_user_id(user_id: str):
