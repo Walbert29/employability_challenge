@@ -53,7 +53,7 @@ def get_applications_by_user_id(user_id: str):
 
         for application_data in applications_user:
             current_application = {
-                "postulation_id": application_data.get("ApplicationModel").get("id"),
+                "postulation_id": application_data.get("ApplicationModel").get("application_id"),
                 "vacancy": application_data.get("VacancyModel"),
             }
             data_applications.append(current_application)
@@ -111,7 +111,7 @@ def get_applications_by_vacancy_id(vacancy_id: str):
 
         for application_data in applications_vacancy:
             current_application = {
-                "postulation_id": application_data.get("ApplicationModel").get("id"),
+                "postulation_id": application_data.get("ApplicationModel").get("application_id"),
                 "user": application_data.get("UserModel"),
             }
             data_applications.append(current_application)
