@@ -2,4 +2,5 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: uvicorn main:app
+  image:
+  web: employability
