@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 
-from schemas.user import UpdateUserSchema, UserSchema
-from services import user
+from src.schemas.user import UpdateUserSchema, UserSchema
+from src.services import user
 
 user_router = APIRouter(prefix="/user")
 

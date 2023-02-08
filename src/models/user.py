@@ -2,7 +2,7 @@ import uuid
 
 from sqlalchemy import ARRAY, JSON, TIMESTAMP, Column, Integer, String
 
-from core.database import Base
+from src.core.database import Base
 
 
 class UserModel(Base):

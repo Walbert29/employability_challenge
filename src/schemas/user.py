@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from pydantic import BaseModel, EmailStr, Field
 
-from utils.schemas_examples import user_schema
+from src.utils.schemas_examples import user_schema
 
 
 class Skills(BaseModel):

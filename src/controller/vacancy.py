@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 
-from schemas.vacancy import VacancySchema
-from services import vacancy
+from src.schemas.vacancy import VacancySchema
+from src.services import vacancy
 
 vacancy_router = APIRouter(prefix="/vacancy")
 
