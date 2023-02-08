@@ -142,7 +142,7 @@ def create_application(data_application_in: ApplicationSchema):
         db = create_session()
 
         return application.create_application(
-            db=db, data_application_in=data_application_in
+            db=db, application_data_in=data_application_in
         )
 
     except Exception as error:
